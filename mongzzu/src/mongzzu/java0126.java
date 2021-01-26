@@ -1,22 +1,38 @@
 package mongzzu;
-interface Po{
-	void pr(int a,String b);
-	void pr(String b);
-}
-class Point implements Po{
-	public void pr(int a,String b) {
-		System.out.println(a+" "+b);
+class Music extends Thread{
+	String a;
+	Music(String a){this.a=a;}
+	
+	public void run() {
+		for(int i=0;i<10;i++) {
+			System.out.println(a);
+		}
 	}
-	public void pr(String b) {
-		System.out.println(b);
+}
+class Movie implements Runnable{
+	String a;
+	Movie(String a){this.a=a;}
+	
+	public void run() {
+		for(int i=0;i<10;i++) {
+			System.out.println(a);
+		}
 	}
 }
 class java0126 {
-	public void main(String[] args) {
-		Po p=new Point();
-		p.pr(30000,"java");
-		p.pr("python");
+	public static void main(String[] args) {
+		
+		Music m=new Music("음악 재생");
+		m.start();
+		
+		Movie m1=new Movie("영화 재생");
+		Thread t=new Thread(m1);
+		t.start();
+		
+		try {
+			m.join();
+			t.join();
+		}catch(Exception e) {}
 	}
-
 }
 
